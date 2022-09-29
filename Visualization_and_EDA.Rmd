@@ -1,0 +1,13 @@
+---
+title: "Visualization and EDA"
+author: "Rae Spriggs"
+date: "2022-09-29"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+
