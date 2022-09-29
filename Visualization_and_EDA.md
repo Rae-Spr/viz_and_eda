@@ -141,3 +141,116 @@ weather_df %>%
     ## Warning: Removed 3 rows containing missing values (geom_point).
 
 ![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+## Univariate plots
+
+Histograms, density plots, boxplots, violins
+
+``` r
+weather_df %>% 
+  ggplot(aes(x=tmax, fill = name)) + 
+  geom_histogram() + 
+  facet_grid(. ~ name)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
+
+![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+Let’s see more options!
+
+``` r
+weather_df %>% 
+  ggplot(aes(x=tmax, fill = name)) + 
+  geom_density(alpha = .3) 
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_density).
+
+![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+Boxplots??
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = name, y = tmax, fill = name)) + 
+  geom_boxplot()
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
+
+![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+Violin plot
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = name, y = tmax, fill = name)) + 
+  geom_violin()
+```
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_ydensity).
+
+![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+OR
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmax, y = name, fill = name)) + 
+  geom_density_ridges(alpha = .3)
+```
+
+    ## Picking joint bandwidth of 1.84
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_density_ridges).
+
+![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+## Saving and embedding plots
+
+First let’s save a plot
+
+``` r
+weather_scatterplot = 
+  weather_df %>% 
+  ggplot(aes(x = date, y = tmax, color = name)) + 
+  geom_point(aes(size = prcp), alpha = .3) + 
+  geom_smooth(se = FALSE) +
+  facet_grid(. ~ name)
+
+weather_scatterplot
+```
+
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_smooth).
+
+    ## Warning: Removed 3 rows containing missing values (geom_point).
+
+![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+``` r
+ggsave(file = "data/weather_scatterplot.pdf", 
+       plot = weather_scatterplot, 
+       width = 8, height = 5)
+```
+
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_smooth).
+    ## Removed 3 rows containing missing values (geom_point).
+
+``` r
+weather_scatterplot
+```
+
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+
+    ## Warning: Removed 3 rows containing non-finite values (stat_smooth).
+
+    ## Warning: Removed 3 rows containing missing values (geom_point).
+
+![](Visualization_and_EDA_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
